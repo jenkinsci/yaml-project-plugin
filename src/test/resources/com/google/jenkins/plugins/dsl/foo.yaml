@@ -1,0 +1,9 @@
+logrotate: false
+buildDiscarder:
+  stapler-class: !by-name Log Rotation
+builder:
+  command: echo Hello World
+  kind: !shell
+crumb: test
+kind: !freestyle
+properties: {}

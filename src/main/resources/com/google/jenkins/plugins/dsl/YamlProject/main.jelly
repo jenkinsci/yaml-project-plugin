@@ -1,0 +1,35 @@
+<!--
+ Copyright 2013 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler"
+     xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson"
+     xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+  <table width="100%">
+    <tr>
+      <td width="85%">
+        <fieldset>
+          <legend><h2>${it.lastProjectView.viewName}: ${it.lastProject.displayName}</h2></legend>
+          <st:include it="${it.lastProjectView}" page="main.jelly" xmlns:st="jelly:stapler" />
+        </fieldset>
+      </td>
+      <td width="15%">
+        <fieldset>
+          <legend><h3>${it.jobHistoryView.viewName}</h3></legend>
+          <st:include it="${it.jobHistoryView}" page="main.jelly" xmlns:st="jelly:stapler" />
+        </fieldset>
+      </td>
+    </tr>
+  </table>
+</j:jelly>

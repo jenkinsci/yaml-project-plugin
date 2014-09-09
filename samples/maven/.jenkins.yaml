@@ -1,0 +1,3 @@
+builder:
+  kind: !maven
+  targets: clean verify

@@ -1,0 +1,18 @@
+kind: !freestyle
+scm:
+  kind: !git scm
+  userRemoteConfigs:
+    url: https://github.com/jenkinsci/my-plugin.git
+  branches:
+    name: master
+builder:
+- kind: !maven
+  targets: clean package
+- kind: !shell
+  command: echo Hello World
+publisher:
+- kind: !trigger
+  childProjects: test
+  threshold: SUCCESS
+- kind: !mailer
+  mailer_recipients: foo@bar.com

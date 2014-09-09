@@ -1,0 +1,5 @@
+string: hello
+int: 3
+bool: true
+array: []
+object: {}

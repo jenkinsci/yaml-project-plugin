@@ -1,0 +1,15 @@
+kind: !matrix
+
+axis:
+- kind: !text-axis
+  name: FOO
+  valueString: Hello World
+
+- kind: !text-axis
+  name: BAR
+  valueString: World Mundo
+
+builder:
+  kind: !shell
+  command: echo $FOO $BAR
+

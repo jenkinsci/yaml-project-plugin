@@ -1,0 +1,4 @@
+properties: {}
+builder:
+- kind: hudson.tasks.Shell
+  command: echo Hola Mundo

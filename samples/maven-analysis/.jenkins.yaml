@@ -1,0 +1,16 @@
+kind: !freestyle
+builder:
+  kind: !maven
+  targets: clean verify
+
+publisher:
+  # Publish checkstyle report
+  - kind: !checkstyle
+
+  # Publish findbugs report
+  - kind: !findbugs
+    thresholdLimit: low
+    unstableTotalAll: 0
+    failedTotalAll: 0
+
+

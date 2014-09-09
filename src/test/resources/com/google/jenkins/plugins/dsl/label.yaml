@@ -1,0 +1,13 @@
+# TODO(mattmoor): Push back a core change that allows us to do this properly.
+hasSlaveAffinity: 'true'
+_.assignedLabelString: slave
+
+logrotate: false
+buildDiscarder:
+  stapler-class: !by-name Log Rotation
+builder:
+  command: echo Hello World
+  kind: !shell
+crumb: test
+kind: !freestyle
+properties: {}

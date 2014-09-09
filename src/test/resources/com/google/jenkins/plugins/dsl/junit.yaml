@@ -1,0 +1,14 @@
+properties: {}
+builder:
+- kind: hudson.tasks.Shell
+  command: |
+    cat > foo.xml << EOF
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <testsuite failures="0" time="0" errors="0" skipped="0" tests="1" name="com.google.appengine.demos.guestbook.GuestbookServletTest">
+      <testcase time="0" classname="com.google.appengine.demos.guestbook.GuestbookServletTest" name="testDoGet"/>
+    </testsuite>
+    EOF
+publisher:
+- testResults: 'foo.xml'
+  keepLongStdio: 'false'
+  kind: hudson.tasks.junit.JUnitResultArchiver

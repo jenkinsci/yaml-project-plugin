@@ -1,0 +1,18 @@
+kind: hudson.model.FreeStyleProject
+scm:
+  kind: hudson.plugins.git.GitSCM
+  userRemoteConfigs:
+    url: https://github.com/jenkinsci/my-plugin.git
+  branches:
+    name: master
+builder:
+- kind: hudson.tasks.Maven
+  targets: clean package
+- kind: hudson.tasks.Shell
+  command: echo Hello World
+publisher:
+- kind: hudson.tasks.BuildTrigger
+  childProjects: test
+  threshold: SUCCESS
+- kind: hudson.tasks.Mailer
+  mailer_recipients: foo@bar.com

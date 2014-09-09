@@ -1,0 +1,11 @@
+builder:
+  kind: !shell
+  command: echo Hello Google Cloud Storage
+
+publisher:
+  kind: !by-name Google Cloud Storage Uploader
+  credentialsId: your-app-id
+  uploads:
+  - stapler-class: !by-name Build Log Upload
+    logName: my-log-name.txt
+    bucket: gs://my-bucket-name

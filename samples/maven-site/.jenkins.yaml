@@ -1,0 +1,20 @@
+kind: !freestyle
+builder:
+  kind: !maven
+  targets: clean site
+
+publisher:
+- kind: !by-name Publish HTML reports
+  reportTargets:
+
+  # Publish Javadocs
+  - reportDir: target/site/apidocs
+    reportFiles: index.html
+    reportName: apidocs
+
+  # Publish JXR output
+  - reportDir: target/site/xref/
+    reportFiles: index.html
+    reportName: xref
+
+

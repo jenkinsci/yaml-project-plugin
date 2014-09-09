@@ -1,0 +1,9 @@
+kind: !freestyle
+builder:
+  kind: !shell
+  command: |
+    #!/bin/bash -e
+
+    echo foo
+    echo bar
+    echo baz

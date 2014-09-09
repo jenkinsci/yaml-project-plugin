@@ -1,0 +1,15 @@
+logrotate: false
+buildDiscarder:
+  stapler-class: !by-name Log Rotation
+properties:
+  hudson-model-ParametersDefinitionProperty:
+    parameterized:
+      parameter:
+        name: foo
+        defaultValue: bar
+        kind: !by-name String Parameter
+builder:
+  command: echo $foo
+  kind: !shell
+crumb: test
+kind: !freestyle
