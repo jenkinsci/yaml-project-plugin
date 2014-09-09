@@ -24,7 +24,7 @@
   <!--
       Lots of boilerplate from: https://wiki.jenkins-ci.org/display/JENKINS/Hosting+Plugins
   -->
-  <artifactId>yaml-project-plugin</artifactId>
+  <artifactId>yaml-project</artifactId>
   <packaging>hpi</packaging>
   <version>0.1-SNAPSHOT</version>
 
@@ -49,9 +49,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}.git</connection>
-    <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}.git</developerConnection>
-    <url>http://github.com/jenkinsci/${project.artifactId}</url>
+    <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
+    <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
     <tag>HEAD</tag>
   </scm>
 
