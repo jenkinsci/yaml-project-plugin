@@ -51,7 +51,7 @@ public class YamlAction implements Action {
   /** {@inheritDoc} */
   @Override
   public String getIconFileName() {
-    return "/plugin/yaml-project-plugin/images/24x24/yaml.png";
+    return "/plugin/yaml-project/images/24x24/yaml.png";
   }
 
   /** {@inheritDoc} */

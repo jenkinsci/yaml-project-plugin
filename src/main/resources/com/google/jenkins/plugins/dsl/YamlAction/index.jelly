@@ -20,7 +20,7 @@
     <st:include it="${it.parent}" page="sidepanel.jelly" />
     <l:main-panel>
       <fieldset>
-        <legend><h1><img src="${rootURL}/plugin/yaml-project-plugin/images/32x32/yaml.png" height="32" width="32" style="vertical-align: bottom"/><span style="font-family: courier; color: red; font-size: 150%">YAML</span></h1></legend>
+        <legend><h1><img src="${rootURL}/plugin/yaml-project/images/32x32/yaml.png" height="32" width="32" style="vertical-align: bottom"/><span style="font-family: courier; color: red; font-size: 150%">YAML</span></h1></legend>
         <pre><code>${it.yaml}</code></pre>
       </fieldset>
     </l:main-panel>
