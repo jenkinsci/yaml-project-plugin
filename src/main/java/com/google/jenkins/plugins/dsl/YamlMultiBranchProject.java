@@ -76,7 +76,8 @@ public class YamlMultiBranchProject<T extends AbstractProject & TopLevelItem>
             "0" /* num to keep */);
 
     // Monkey patch the better default.
-    // TODO(mattmoor): upstream making this protected...
+    // TODO(mattmoor): upstream making the "deadBranchStrategy"
+    // field protected instead of patching the object to set it here.
     {
       Class<?> clazz = YamlMultiBranchProject.class.getSuperclass();
       Field field = null;
