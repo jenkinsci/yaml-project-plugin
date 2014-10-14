@@ -15,4 +15,3 @@ publisher:
     forFailedJobs: 'true'
 crumb: test
 kind: hudson.model.FreeStyleProject
-properties: {}

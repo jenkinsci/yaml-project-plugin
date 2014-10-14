@@ -6,4 +6,3 @@ builder:
   kind: !shell
 crumb: test
 kind: !freestyle
-properties: {}

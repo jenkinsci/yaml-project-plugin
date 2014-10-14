@@ -1,5 +1,4 @@
 kind: hudson.matrix.MatrixProject
-properties: {}
 builder:
 - kind: hudson.tasks.Shell
   command: echo Hola Mundo

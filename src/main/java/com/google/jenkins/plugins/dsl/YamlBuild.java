@@ -190,6 +190,9 @@ public class YamlBuild<T extends AbstractProject & TopLevelItem>
 
       final Queue.Item item = Queue.getInstance().schedule(
           project, 0, cause, parameters);
+      if (item == null) {
+        throw new IllegalStateException("Project not scheduled");
+      }
 
       listener.getLogger().println(
           Messages.YamlBuild_StartDelimiter(parent.getYamlPath()));
@@ -200,8 +203,7 @@ public class YamlBuild<T extends AbstractProject & TopLevelItem>
             // This future waits for completion, we only need it to have
             // started.  This future also doesn't seem to properly report
             // cancellation.
-            newBuild = (AbstractBuild) checkNotNull(item).getFuture()
-                .get(1, SECONDS);
+            newBuild = (AbstractBuild) item.getFuture().get(1, SECONDS);
           } catch (CancellationException e) {
             return Result.ABORTED;
           } catch (TimeoutException e) {

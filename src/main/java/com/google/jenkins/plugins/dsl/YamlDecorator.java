@@ -93,11 +93,6 @@ public class YamlDecorator extends ItemListener {
       // too generic a term to filter out above.
       json.put("name", null);
 
-      // TODO(mattmoor): Remove once properties is properly null checked.
-      if (!json.containsKey("properties")) {
-        json.put("properties", new JSONObject());
-      }
-
       action.setYaml(j2y.toYaml(json.toString()));
       project.save();
     } catch (IOException e) {

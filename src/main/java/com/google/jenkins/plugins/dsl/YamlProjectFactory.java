@@ -25,9 +25,11 @@ import javax.annotation.Nullable;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
+import com.google.common.primitives.UnsignedLongs;
 import com.google.jenkins.plugins.dsl.restrict.AbstractRestriction;
 
 import hudson.Extension;
@@ -89,9 +91,19 @@ public class YamlProjectFactory<T extends AbstractProject & TopLevelItem>
   @Override
   public YamlProject<T> newInstance(final Branch branch) {
     try {
+      // If the branch name contains '/' then use its MD5 hash
+      // as the project name, but otherwise use the branch name
+      // for backwards compatibility.
+      final String hashedName = UnsignedLongs.toString(Hashing.md5().hashString(
+          branch.getName(), Charsets.UTF_8).asLong(), 16);
+      final String projectName =
+          branch.getName().indexOf('/') == -1 ? branch.getName() : hashedName;
       final YamlProject<T> project = new YamlProject<T>(
           (YamlMultiBranchProject<T>) getOwner(),
-          branch.getName(), null /* module */);
+          projectName, null /* module */);
+
+      // Set the display name so that it is always the branch name.
+      project.setDisplayName(branch.getName());
 
       project.setBranch(branch);
 
@@ -136,9 +148,6 @@ public class YamlProjectFactory<T extends AbstractProject & TopLevelItem>
   @Override
   public YamlProject<T> setBranch(YamlProject<T> project, Branch branch) {
     try {
-      checkArgument(project.getBranch().getHead().equals(branch.getHead()));
-      checkArgument(project.getBranch().getSourceId().equals(
-          branch.getSourceId()));
       final Branch oldBranch = project.getBranch();
       project.setBranch(branch);
       if (!oldBranch.equals(branch)) {

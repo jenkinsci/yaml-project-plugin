@@ -98,7 +98,10 @@ public abstract class AbstractBranchAwareProject
       final SCMHead head = getBranch().getHead();
       final SCMSource source = getSource();
       final SCMRevision revision = source.fetch(head, listener);
-      build.addAction(new SCMRevisionAction(checkNotNull(revision)));
+      if (revision == null) {
+        throw new IllegalStateException("Revision action without revision");
+      }
+      build.addAction(new SCMRevisionAction(revision));
     }
     return result;
   }

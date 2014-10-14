@@ -1,4 +1,3 @@
-properties: {}
 builder:
 - kind: hudson.tasks.Shell
   command: |

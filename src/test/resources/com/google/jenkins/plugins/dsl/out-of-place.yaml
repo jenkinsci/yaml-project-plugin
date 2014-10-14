@@ -3,4 +3,3 @@ publisher:
   command: echo Hello World
   kind: hudson.tasks.Shell
 kind: hudson.model.FreeStyleProject
-properties: {}

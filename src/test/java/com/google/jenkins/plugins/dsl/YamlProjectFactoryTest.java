@@ -106,12 +106,10 @@ public class YamlProjectFactoryTest {
 
     assertSame(mockProject, underTest.setBranch(mockProject, mockBranch));
 
-    verify(mockProject, times(3)).getBranch();
+    verify(mockProject, times(1)).getBranch();
     verify(mockProject).setBranch(mockBranch);
     verifyNoMoreInteractions(mockProject);
 
-    verify(mockBranch, times(2)).getHead();
-    verify(mockBranch, times(2)).getSourceId();
     verifyNoMoreInteractions(mockBranch);
 
     verifyNoMoreInteractions(mockHead);
@@ -135,13 +133,11 @@ public class YamlProjectFactoryTest {
 
     assertSame(mockProject, underTest.setBranch(mockProject, mockBranch));
 
-    verify(mockProject, times(3)).getBranch();
+    verify(mockProject, times(1)).getBranch();
     verify(mockProject).setBranch(mockBranch);
     verify(mockProject).save();
     verifyNoMoreInteractions(mockProject);
 
-    verify(mockBranch, times(1)).getHead();
-    verify(mockBranch, times(1)).getSourceId();
     verifyNoMoreInteractions(mockBranch);
 
     verifyNoMoreInteractions(mockHead);

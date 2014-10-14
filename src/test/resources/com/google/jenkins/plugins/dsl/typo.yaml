@@ -3,4 +3,3 @@ builder:
   command: echo Hello World
   kind: hudson.tasks.Shellz
 kind: hudson.model.FreeStyleProject
-properties: {}

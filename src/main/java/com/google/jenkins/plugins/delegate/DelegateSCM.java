@@ -189,7 +189,11 @@ public class DelegateSCM<T extends AbstractBranchAwareProject & ItemGroup>
         final AbstractProject causeProject =
             ((AbstractProject) checkNotNull(Jenkins.getInstance())
                 .getItemByFullName(upstreamCause.getUpstreamProject()));
-        AbstractBuild causeBuild = checkNotNull(causeProject).getBuildByNumber(
+        if (causeProject == null) {
+          throw new IllegalStateException(
+              "Unable to lookup upstream cause project");
+        }
+        AbstractBuild causeBuild = causeProject.getBuildByNumber(
             upstreamCause.getUpstreamBuild());
         if (upstreamCause.getUpstreamProject().equals(upstreamProjectName)) {
           return causeBuild;
