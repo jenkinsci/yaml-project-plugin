@@ -26,7 +26,7 @@
   -->
   <artifactId>yaml-project</artifactId>
   <packaging>hpi</packaging>
-  <version>0.1-beta-3-SNAPSHOT</version>
+  <version>0.1-beta-3</version>
 
   <name>YAML Project support for Jenkins</name>
   <description>
