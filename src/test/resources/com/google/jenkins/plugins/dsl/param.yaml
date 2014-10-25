@@ -8,6 +8,15 @@ properties:
         name: foo
         defaultValue: bar
         kind: !by-name String Parameter
+disable: false
+concurrentBuild: false
+hasCustomQuietPeriod: false
+quiet_period: 5
+hasCustomScmCheckoutRetryCount: false
+scmCheckoutRetryCount: 0
+blockBuildWhenUpstreamBuilding: false
+blockBuildWhenDownstreamBuilding: false
+hasCustomWorkspace: false
 builder:
   command: echo $foo
   kind: !shell

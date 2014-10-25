@@ -1,6 +1,5 @@
-# TODO(mattmoor): Push back a core change that allows us to do this properly.
-hasSlaveAffinity: 'true'
-_.assignedLabelString: slave
+# As of 1.585, this is sufficient for specifying a label.
+label: slave
 
 logrotate: false
 buildDiscarder:
