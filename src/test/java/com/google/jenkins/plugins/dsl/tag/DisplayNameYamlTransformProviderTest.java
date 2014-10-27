@@ -171,14 +171,14 @@ public class DisplayNameYamlTransformProviderTest {
   @Test
   public void testConstruct() {
     assertEquals(hudson.model.FreeStyleProject.class.getName(),
-        underTest.construct("Build a free-style software project"));
+        underTest.construct("Freestyle project"));
     assertEquals(hudson.tasks.Shell.class.getName(),
         underTest.construct("Execute shell"));
   }
 
   @Test
   public void testRepresent() {
-    assertEquals("Build a free-style software project",
+    assertEquals("Freestyle project",
         underTest.represent(hudson.model.FreeStyleProject.class));
     assertEquals("Execute shell",
         underTest.represent(hudson.tasks.Shell.class));

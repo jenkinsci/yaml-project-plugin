@@ -1,0 +1,4 @@
+label: my-slave-label
+builder:
+  kind: !shell
+  command: echo Hello World

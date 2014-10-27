@@ -1,4 +1,4 @@
-kind: !by-name Build a free-style software project
+kind: !by-name Freestyle project
 scm:
   kind: hudson.plugins.git.GitSCM   # !by-name 'Git' is not unique
   userRemoteConfigs:

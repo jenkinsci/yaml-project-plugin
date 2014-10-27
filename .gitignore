@@ -1,0 +1,6 @@
+target/
+work/
+*/.gitignore
+*.iml
+*/*.iml
+dependency-reduced-pom.xml
