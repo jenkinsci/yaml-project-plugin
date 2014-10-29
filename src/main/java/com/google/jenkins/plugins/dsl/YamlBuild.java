@@ -366,7 +366,7 @@ public class YamlBuild<T extends AbstractProject & TopLevelItem>
       project.save();
       ItemListener.fireOnCreated(project);
 
-      checkNotNull(Jenkins.getInstance()).rebuildDependencyGraphAsync();
+      checkNotNull(Jenkins.getInstance()).rebuildDependencyGraph();
 
       return project;
     }
