@@ -1,0 +1,11 @@
+kind: !freestyle
+properties:
+  !key:by-name Parameters:
+    parameterized:
+      parameter:
+        kind: !by-name String Parameter
+        name: FOO
+        defaultValue: bar
+builder:
+  kind: !shell
+  command: echo $FOO

@@ -100,12 +100,13 @@ public abstract class JsonToYaml {
 
         for (YamlTransform xform : inputTransforms) {
           for (Class clazz : xform.getClasses()) {
+            final String text = xform.construct(xform.represent(clazz));
             // The first transform "wins"
-            if (classes.containsKey(clazz.getName())) {
+            if (classes.containsKey(text)) {
               continue;
             }
-            transforms.put(clazz.getName(), xform);
-            classes.put(clazz.getName(), clazz);
+            transforms.put(text, xform);
+            classes.put(text, clazz);
           }
         }
 

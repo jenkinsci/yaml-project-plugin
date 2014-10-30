@@ -162,7 +162,8 @@ public class DisplayNameYamlTransformProviderTest {
   public void testByNameTranslations() throws Exception {
     // Only use the by-name transform
     YamlToJson underTest = new YamlToJson.Default(
-        ImmutableList.of(this.underTest));
+        ImmutableList.of(this.underTest,
+            new KeyYamlTransformProvider.Transform(this.underTest)));
     for (String test : BY_NAME_TESTS) {
       testOneTranslation(underTest, test);
     }

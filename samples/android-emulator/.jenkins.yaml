@@ -1,0 +1,33 @@
+kind: !matrix
+axis:
+- kind: !text-axis
+  name: OS
+  valueString: 2.1 2.2
+- kind: !text-axis
+  name: DENSITY
+  valueString: 160
+- kind: !text-axis
+  name: RESOLUTION
+  valueString: HVGA
+
+!key:by-name Run an Android emulator during build:
+  commandLineOptions: ''
+  executable: ''
+  deleteAfterBuild: true
+  showWindow: false
+  startupDelay: '0'
+  useNamed:
+    value: false
+    avdNameSuffix: ''
+    deviceLocale: ''
+    osVersion: $OS
+    screenDensity: $DENSITY
+    screenResolution: $RESOLUTION
+    sdCardSize: ''
+    targetAbi: armeabi-v7a
+  useSnapshots: false
+  wipeData: true
+
+builder:
+  kind: !shell
+  command: sleep 10

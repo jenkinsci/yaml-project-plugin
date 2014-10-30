@@ -2,7 +2,7 @@ logrotate: false
 buildDiscarder:
   stapler-class: !by-name Log Rotation
 properties:
-  hudson-model-ParametersDefinitionProperty:
+  !key:by-name Parameters:
     parameterized:
       parameter:
         name: foo

@@ -1,4 +1,10 @@
 kind: !by-name Freestyle project
+
+properties:
+  !key:by-name Parameters:
+    parameterized:
+      parameter:
+        name: foo
 scm:
   kind: hudson.plugins.git.GitSCM   # !by-name 'Git' is not unique
   userRemoteConfigs:

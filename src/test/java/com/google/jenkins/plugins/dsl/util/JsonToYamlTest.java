@@ -73,7 +73,8 @@ public class JsonToYamlTest {
 
     @Override
     public String construct(String value) {
-      throw new UnsupportedOperationException();
+      assertEquals("", value);
+      return this.clazz.getName();
     }
 
     @Override
@@ -94,6 +95,11 @@ public class JsonToYamlTest {
               public String represent(Class clazz) {
                 assertEquals(this.clazz, clazz);
                 return "scm";
+              }
+              @Override
+              public String construct(String value) {
+                assertEquals("scm", value);
+                return this.clazz.getName();
               }
             },
             new HelperTransform("!shell", Shell.class),

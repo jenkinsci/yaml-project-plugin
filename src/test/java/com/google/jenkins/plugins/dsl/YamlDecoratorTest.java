@@ -28,7 +28,6 @@ import org.junit.Test;
 import org.jvnet.hudson.test.JenkinsRule;
 import org.mockito.MockitoAnnotations;
 
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.google.common.io.CharStreams;
 
 import hudson.model.FreeStyleProject;
@@ -62,11 +61,8 @@ public class YamlDecoratorTest {
 
   @Test
   public void testProjectCreation() throws Exception {
-    HtmlForm form = jenkins.createWebClient().getPage(project, "configure")
-        .getFormByName("config");
-
     // Submit the form and check that the values match our original construction
-    jenkins.submit(form);
+    jenkins.configRoundtrip(project);
 
     // Verify that a YamlAction was attached by our decorator through a method
     // that doesn't attach one if absent.
