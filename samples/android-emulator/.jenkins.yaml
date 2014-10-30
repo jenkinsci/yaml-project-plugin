@@ -10,6 +10,10 @@ axis:
   name: RESOLUTION
   valueString: HVGA
 
+# Spin up an Android emulator "Build Environment" based on the
+# values of our matrix build.
+# NOTE: we use !key:by-name when we are in the 'key' position of
+# the map.
 !key:by-name Run an Android emulator during build:
   commandLineOptions: ''
   executable: ''

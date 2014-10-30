@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Supplier;
@@ -101,6 +102,7 @@ public class KeyYamlTransformProvider extends YamlTransformProvider {
     /** {@inheritDoc} */
     @Override
     public String getTag() {
+      checkState(xform.getTag().startsWith("!"));
       final String innerTagNoBang = xform.getTag().substring(1);
       return "!key:" + innerTagNoBang;
     }
@@ -118,6 +120,7 @@ public class KeyYamlTransformProvider extends YamlTransformProvider {
       final String inner = xform.construct(value);
 
       // Replace the result with a suitable JSON key by replacing '.' with '-'
+      // See: hudson.model.Descriptor#getJsonSafeClassName()
       return inner.replace('.', '-');
     }
 
