@@ -18,6 +18,13 @@
      xmlns:f="/lib/form" xmlns:i="jelly:fmt">
   <j:choose>
     <j:when test="${it.owner.lastProject != null}">
+      <div id="description">
+        <div>
+          <j:out value="${it.owner.lastProject.description != null
+                        ? app.markupFormatter.translate(it.owner.lastProject.description)
+                        : ''}" />
+        </div>
+      </div>
       <st:include it="${it.owner.lastProject}" page="main.jelly" xmlns:st="jelly:stapler" />
     </j:when>
     <j:otherwise>
