@@ -1,6 +1,7 @@
 logrotate: false
 buildDiscarder:
   stapler-class: !by-name Log Rotation
+  $class: !by-name Log Rotation
 properties:
   !key:by-name Parameters:
     parameterized:

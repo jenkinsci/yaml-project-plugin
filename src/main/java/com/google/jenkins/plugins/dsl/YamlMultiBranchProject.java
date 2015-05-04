@@ -19,8 +19,10 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.servlet.ServletException;
 
+import org.acegisecurity.Authentication;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -37,9 +39,11 @@ import hudson.model.AbstractProject;
 import hudson.model.Descriptor;
 import hudson.model.Descriptor.FormException;
 import hudson.model.ItemGroup;
+import hudson.model.Queue;
 import hudson.model.TopLevelItem;
 import hudson.model.View;
 import hudson.scm.SCMDescriptor;
+import hudson.security.ACL;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Publisher;
 import hudson.util.FormValidation;
@@ -131,6 +135,20 @@ public class YamlMultiBranchProject<T extends AbstractProject & TopLevelItem>
           Messages.YamlMultiBranchProject_ViewExists(value));
     }
     return FormValidation.ok();
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  @Nonnull
+  public Authentication getDefaultAuthentication() {
+    return ACL.SYSTEM;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  @Nonnull
+  public Authentication getDefaultAuthentication(Queue.Item item) {
+    return getDefaultAuthentication();
   }
 
   /** {@inheritDoc} */
