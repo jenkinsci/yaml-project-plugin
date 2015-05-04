@@ -1,5 +1,5 @@
 logrotate: 'false'
 builder:
   command: echo Hello World
-  kind: hudson.tasks.Shellz
-kind: hudson.model.FreeStyleProject
+  $class: hudson.tasks.Shellz
+$class: hudson.model.FreeStyleProject

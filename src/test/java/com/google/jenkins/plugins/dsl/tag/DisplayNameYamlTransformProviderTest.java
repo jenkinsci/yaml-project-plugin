@@ -214,9 +214,8 @@ public class DisplayNameYamlTransformProviderTest {
 
     final String json = read(jsonStream);
 
-    System.out.println("Testing: " + name);
-
-    assertEquals(json, underTest.toJson(yamlStream));
+    assertEquals("YAML to JSON did not match expectations for " + name + ".",
+        json, underTest.toJson(yamlStream));
   }
 
   private String read(InputStream stream) throws IOException {

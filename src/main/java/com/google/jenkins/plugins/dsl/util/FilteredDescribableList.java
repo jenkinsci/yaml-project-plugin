@@ -91,34 +91,34 @@ public class FilteredDescribableList
     final Object array = formData.get(key);
     if (array != null) {
       for (Object o : JSONArray.fromObject(array)) {
-        validateKind(((JSONObject) o).getString("kind"), descriptors);
+        validateClass(((JSONObject) o).getString("$class"), descriptors);
       }
     }
     super.rebuildHetero(req, formData, applyFilter(descriptors), key);
   }
 
   /**
-   * Validates that the given kind is present on the Jenkins master,
-   * and appropriately typed for the expected kind of describable.
+   * Validates that the given $class is present on the Jenkins master,
+   * and appropriately typed for the expected $class of describable.
    * @throws BadTypeException is there are any issues
    */
-  private void validateKind(String kind,
+  private void validateClass(String className,
       Collection<? extends Descriptor<T>> descriptors) {
     final ClassLoader baseLoader =
         checkNotNull(Jenkins.getInstance()).getPluginManager().uberClassLoader;
     try {
-      final Class type = baseLoader.loadClass(kind);
+      final Class type = baseLoader.loadClass(className);
       final Descriptor<T> descriptor =
           checkNotNull(Jenkins.getInstance()).getDescriptor(type);
 
       if (!descriptors.contains(descriptor)) {
         throw new BadTypeException(
-            Messages.FilteredDescribableList_NotInList(kind));
+            Messages.FilteredDescribableList_NotInList(className));
       }
     } catch (ClassNotFoundException e) {
       // TODO(mattmoor): and if its an unknown tag?  then what happens?
       throw new BadTypeException(
-          Messages.FilteredDescribableList_Unavailable(kind));
+          Messages.FilteredDescribableList_Unavailable(className));
     }
   }
 

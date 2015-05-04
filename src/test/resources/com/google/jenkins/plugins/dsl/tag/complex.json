@@ -1,1 +1,1 @@
-{"foo":[{"kind":"com.google.jenkins.plugins.dsl.tag.ArgumentYamlTransformTest$Bar"},{"kind":"com.google.jenkins.plugins.dsl.tag.ArgumentYamlTransformTest$Baz"}]}
+{"foo":[{"$class":"com.google.jenkins.plugins.dsl.tag.ArgumentYamlTransformTest$Bar"},{"$class":"com.google.jenkins.plugins.dsl.tag.ArgumentYamlTransformTest$Baz"}]}

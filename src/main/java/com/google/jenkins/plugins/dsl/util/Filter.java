@@ -113,8 +113,8 @@ public final class Filter {
   /** Keys to filter out. */
   private static boolean keyFilter(String key, JSONObject object) {
     if ("stapler-class".equals(key)) {
-      // Filter any 'stapler-class' that co-exists with a 'kind'.
-      return object.containsKey("kind");
+      // Filter any 'stapler-class' that co-exists with a '$class'.
+      return object.containsKey("$class");
     }
     return "".equals(key)
         || "scm".equals(key)

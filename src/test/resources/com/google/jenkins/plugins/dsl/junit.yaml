@@ -1,5 +1,5 @@
 builder:
-- kind: hudson.tasks.Shell
+- $class: hudson.tasks.Shell
   command: |
     cat > foo.xml << EOF
     <?xml version="1.0" encoding="UTF-8" ?>
@@ -10,4 +10,4 @@ builder:
 publisher:
 - testResults: 'foo.xml'
   keepLongStdio: 'false'
-  kind: hudson.tasks.junit.JUnitResultArchiver
+  $class: hudson.tasks.junit.JUnitResultArchiver

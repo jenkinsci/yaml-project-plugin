@@ -54,7 +54,6 @@ public class YamlDecorator extends ItemListener {
   /** {@inheritDoc} */
   @Override
   public void onUpdated(Item item) {
-    logger.warning("onUpdated called");
     if (!(item instanceof AbstractProject)) {
       return;
     }
@@ -87,18 +86,15 @@ public class YamlDecorator extends ItemListener {
     final JsonToYaml j2y = new JsonToYaml.Default(YamlTransformProvider.get());
     try {
       final YamlAction action = YamlAction.of(project);
-      logger.warning("Attaching kind");
 
-      json.put("kind", item.getClass().getName());
-      // The $class is used to recover the project type
-      // stapler-class is produced for backward compatibility
-      //json.put("stapler-class", item.getClass().getName());
-      //json.put("$class", item.getClass().getName());
+      // The $class is used to recover the project type.
+      json.put("$class", item.getClass().getName());
       // The name is specified by the container YamlProject, but this is
       // too generic a term to filter out above.
       json.put("name", null);
 
       action.setYaml(j2y.toYaml(json.toString()));
+
       project.save();
     } catch (IOException e) {
       logger.log(SEVERE, e.getMessage(), e);

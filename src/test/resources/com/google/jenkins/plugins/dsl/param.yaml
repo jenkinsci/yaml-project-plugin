@@ -1,6 +1,5 @@
 logrotate: false
 buildDiscarder:
-  stapler-class: !by-name Log Rotation
   $class: !by-name Log Rotation
 properties:
   !key:by-name Parameters:
@@ -8,7 +7,7 @@ properties:
       parameter:
         name: foo
         defaultValue: bar
-        kind: !by-name String Parameter
+        $class: !by-name String Parameter
 disable: false
 concurrentBuild: false
 hasCustomQuietPeriod: false
@@ -20,6 +19,6 @@ blockBuildWhenDownstreamBuilding: false
 hasCustomWorkspace: false
 builder:
   command: echo $foo
-  kind: !shell
+  $class: !shell
 crumb: test
-kind: !freestyle
+$class: !freestyle

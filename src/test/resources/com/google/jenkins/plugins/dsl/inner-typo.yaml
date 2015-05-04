@@ -1,17 +1,17 @@
 logrotate: 'false'
 builder:
   command: echo Hello World
-  kind: hudson.tasks.Shell
+  $class: hudson.tasks.Shell
 publisher:
-  kind: com.google.jenkins.plugins.storage.GoogleCloudStorageUploader
+  $class: com.google.jenkins.plugins.storage.GoogleCloudStorageUploader
   credentialsId: for-test
   uploads:
     # TODO(mattmoor): Figure out how we eliminate this
     stapler-class: com.google.jenkins.plugins.storage.StdoutUploadz
-    kind: com.google.jenkins.plugins.storage.StdoutUploadz
+    $class: com.google.jenkins.plugins.storage.StdoutUploadz
     logName: build-log.txt
     bucketNameWithVars: gs://my-test-bucket
     sharedPublicly: 'false'
     forFailedJobs: 'true'
 crumb: test
-kind: hudson.model.FreeStyleProject
+$class: hudson.model.FreeStyleProject
