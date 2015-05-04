@@ -54,14 +54,13 @@ public class YamlDecorator extends ItemListener {
   /** {@inheritDoc} */
   @Override
   public void onUpdated(Item item) {
+    logger.warning("onUpdated called");
     if (!(item instanceof AbstractProject)) {
-      logger.warning("Returning A");
       return;
     }
 
     final StaplerRequest request = Stapler.getCurrentRequest();
     if (request == null) {
-      logger.warning("Returning B");
       return;
     }
 
@@ -70,12 +69,10 @@ public class YamlDecorator extends ItemListener {
       // Avoid the logic to throw and redirect to an error page
       // when "getSubmittedForm" is called with no form data.
       if (Strings.isNullOrEmpty(request.getParameter("json"))) {
-        logger.warning("Returning C");
         return;
       }
       json = request.getSubmittedForm();
       if (json == null) {
-        logger.warning("Returning D");
         return;
       }
       // Scrub the object of a lot of the fluff that comes through
@@ -90,6 +87,7 @@ public class YamlDecorator extends ItemListener {
     final JsonToYaml j2y = new JsonToYaml.Default(YamlTransformProvider.get());
     try {
       final YamlAction action = YamlAction.of(project);
+      logger.warning("Attaching kind");
 
       json.put("kind", item.getClass().getName());
       // The $class is used to recover the project type
