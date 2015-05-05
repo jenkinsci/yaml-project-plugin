@@ -1,6 +1,6 @@
 YAML Project support for Jenkins
 =====================
-This plugin implements a YAML Project based on Jenkins' [https://wiki.jenkins-ci.org/display/JENKINS/Structured+Form+Submission](structured form submissions).
+This plugin implements a YAML Project based on Jenkins' [structured form submissions](https://wiki.jenkins-ci.org/display/JENKINS/Structured+Form+Submission).
 
 [![Build Status](https://jenkins.ci.cloudbees.com/buildStatus/icon?job=plugins/yaml-project-plugin)](https://jenkins.ci.cloudbees.com/job/plugins/job/yaml-project-plugin/)
 
