@@ -1,10 +1,10 @@
-kind: !freestyle
+$class: !freestyle
 builder:
-  kind: !maven
+  $class: !maven
   targets: clean site
 
 publisher:
-- kind: !by-name Publish HTML reports
+- $class: !by-name Publish HTML reports
   reportTargets:
 
   # Publish Javadocs

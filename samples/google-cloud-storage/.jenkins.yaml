@@ -1,9 +1,9 @@
 builder:
-  kind: !shell
+  $class: !shell
   command: echo Hello Google Cloud Storage
 
 publisher:
-  kind: !by-name Google Cloud Storage Uploader
+  $class: !by-name Google Cloud Storage Uploader
   credentialsId: your-app-id
   uploads:
   - stapler-class: !by-name Build Log Upload

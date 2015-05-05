@@ -1,6 +1,6 @@
-kind: !freestyle
+$class: !freestyle
 builder:
-  kind: !shell
+  $class: !shell
   command: |
     #!/bin/bash -e
 
