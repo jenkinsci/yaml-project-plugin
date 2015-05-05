@@ -3,6 +3,6 @@ buildDiscarder:
   stapler-class: !by-name Log Rotation
 builder:
   command: echo Hello World
-  kind: !shell
+  $class: !shell
 crumb: test
-kind: !freestyle
+$class: !freestyle

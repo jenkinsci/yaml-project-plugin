@@ -208,7 +208,8 @@ public class YamlBuild<T extends AbstractProject & TopLevelItem>
             return Result.ABORTED;
           } catch (TimeoutException e) {
             // Check intermittently for cancellation
-            final Queue.Item currentItem = Queue.getInstance().getItem(item.id);
+            final Queue.Item currentItem = Queue.getInstance().getItem(
+                item.getId());
             if (currentItem instanceof Queue.LeftItem) {
               final Queue.LeftItem leftItem = (Queue.LeftItem) currentItem;
               if (leftItem.isCancelled()) {
@@ -402,7 +403,8 @@ public class YamlBuild<T extends AbstractProject & TopLevelItem>
     }
 
     /** Read the DSL file into a {@link JSONObject}. */
-    private JSONObject readToJSON(FilePath yamlFile) throws IOException {
+    private JSONObject readToJSON(FilePath yamlFile)
+        throws IOException, InterruptedException {
       final String freshJson =
           getParent().getModule().getYamlToJson().toJson(yamlFile.read());
       return (JSONObject) JSONSerializer.toJSON(freshJson);

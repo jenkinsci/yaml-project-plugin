@@ -87,13 +87,14 @@ public class YamlDecorator extends ItemListener {
     try {
       final YamlAction action = YamlAction.of(project);
 
-      // The kind is used to recover the project type
-      json.put("kind", item.getClass().getName());
+      // The $class is used to recover the project type.
+      json.put("$class", item.getClass().getName());
       // The name is specified by the container YamlProject, but this is
       // too generic a term to filter out above.
       json.put("name", null);
 
       action.setYaml(j2y.toYaml(json.toString()));
+
       project.save();
     } catch (IOException e) {
       logger.log(SEVERE, e.getMessage(), e);

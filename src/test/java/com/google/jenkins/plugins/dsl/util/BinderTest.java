@@ -181,13 +181,13 @@ public class BinderTest {
       fail("expected exception");
     } catch (ClassCastException e) {
       assertThat(e.getMessage(),
-          allOf(containsString(json.optString("kind", null)),
+          allOf(containsString(json.optString("$class", null)),
               containsString(SCM.class.getName())));
     }
   }
 
   @Test
-  public void testBindJob_EmptyNoKind() throws Exception {
+  public void testBindJob_EmptyNoClass() throws Exception {
     JSONObject json = (JSONObject) JSONSerializer.toJSON(EMPTY_JSON);
 
     Job job = underTest.bindJob(Jenkins.getInstance(), NAME, json);
@@ -198,10 +198,10 @@ public class BinderTest {
   }
 
   @Test
-  public void testBindJob_EmptyWithKind() throws Exception {
+  public void testBindJob_EmptyWithClass() throws Exception {
     JSONObject json = (JSONObject) JSONSerializer.toJSON(EMPTY_JSON);
 
-    json.put("kind", FreeStyleProject.class.getName());
+    json.put("$class", FreeStyleProject.class.getName());
 
     Job job = underTest.bindJob(Jenkins.getInstance(), NAME, json);
 
@@ -211,10 +211,10 @@ public class BinderTest {
   }
 
   @Test
-  public void testBindJob_EmptyWithMatrixKindNoAxes() throws Exception {
+  public void testBindJob_EmptyWithMatrixClassNoAxes() throws Exception {
     JSONObject json = (JSONObject) JSONSerializer.toJSON(EMPTY_JSON);
 
-    json.put("kind", MatrixProject.class.getName());
+    json.put("$class", MatrixProject.class.getName());
 
     Job job = underTest.bindJob(Jenkins.getInstance(), NAME, json);
 
@@ -224,9 +224,9 @@ public class BinderTest {
   }
 
   @Test
-  public void testBindJob_EmptyWithMatrixKindAndAxes() throws Exception {
+  public void testBindJob_EmptyWithMatrixClassAndAxes() throws Exception {
     JSONObject json = (JSONObject) JSONSerializer.toJSON(EMPTY_JSON);
-    json.put("kind", MatrixProject.class.getName());
+    json.put("$class", MatrixProject.class.getName());
 
     JSONArray axes = (JSONArray) JSONSerializer.toJSON(AXES_JSON);
     json.put("axis", axes);
@@ -264,7 +264,7 @@ public class BinderTest {
 
     // TODO(mattmoor): The logic in hudson.scm.SCMS uses the index of the SCM
     // among the collection of compatible SCMS for the given project to
-    // determine which class to bind instead of relying on the 'kind' field.
+    // determine which class to bind instead of relying on the '$class' field.
     // I have prototyped a fix for this, but until it can be pushed back,
     // we cannot test this.
     // JSONObject scm = (JSONObject) JSONSerializer.toJSON(GITSCM_JSON);
@@ -356,24 +356,24 @@ public class BinderTest {
 
   private static final String NAME = "bazinga";
   private static final String SHELL_JSON =
-      "{ 'kind': '" + Shell.class.getName() + "', " +
+      "{ '$class': '" + Shell.class.getName() + "', " +
       " 'command': 'echo Hello World' }";
   private static final String NULLSCM_JSON =
-      "{ 'kind': '" + NullSCM.class.getName() + "' }";
+      "{ '$class': '" + NullSCM.class.getName() + "' }";
 
   private static final String EMPTY_LIST_VIEW =
-      "{ 'kind': '" + ListView.class.getName() + "' }";
+      "{ '$class': '" + ListView.class.getName() + "' }";
 
   // TODO(mattmoor): Eliminate this once properties is properly null checked
   private static final String EMPTY_JSON =
       "{ 'properties': {} }";
 
   private static final String AXIS1_JSON =
-      "{ 'kind': '" + TextAxis.class.getName() + "', " +
+      "{ '$class': '" + TextAxis.class.getName() + "', " +
       "'name': 'a', 'valueString': '1 2' }";
 
   private static final String AXIS2_JSON =
-      "{ 'kind': '" + TextAxis.class.getName() + "', " +
+      "{ '$class': '" + TextAxis.class.getName() + "', " +
       "'name': 'b', 'valueString': '3' }";
 
   private static final String AXES_JSON =
@@ -384,7 +384,7 @@ public class BinderTest {
 
   private static final String GITSCM_JSON =
       "{ " +
-      " 'kind': '" + GitSCM.class.getName() + "', " +
+      " '$class': '" + GitSCM.class.getName() + "', " +
       " 'userRemoteConfigs': {" +
       "   'url': 'https://github.com/jenkinsci/my-plugin.git' " +
       " }, " +
@@ -395,7 +395,7 @@ public class BinderTest {
 
   private static final String MAVEN_JSON =
       "{ " +
-      " 'kind': '" + Maven.class.getName() + "', " +
+      " '$class': '" + Maven.class.getName() + "', " +
       " 'targets': 'clean package', " +
       "}";
 
@@ -404,12 +404,12 @@ public class BinderTest {
 
   private static final String JOB_COLUMN_JSON =
       "{ " +
-      " 'kind': '" + JobColumn.class.getName() + "', " +
+      " '$class': '" + JobColumn.class.getName() + "', " +
       "}";
 
   private static final String STATUS_COLUMN_JSON =
       "{ " +
-      " 'kind': '" + StatusColumn.class.getName() + "', " +
+      " '$class': '" + StatusColumn.class.getName() + "', " +
       "}";
 
   private static final String COLUMNS_JSON =
@@ -417,7 +417,7 @@ public class BinderTest {
 
   private static final String TRIGGER_JSON =
       "{ " +
-      " 'kind': '" + BuildTrigger.class.getName() + "', " +
+      " '$class': '" + BuildTrigger.class.getName() + "', " +
       " 'childProjects': 'test', " +
       " 'threshold': 'SUCCESS', " +
       "}";

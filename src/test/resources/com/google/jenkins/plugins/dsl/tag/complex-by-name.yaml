@@ -1,4 +1,4 @@
-kind: !by-name Freestyle project
+$class: !by-name Freestyle project
 
 properties:
   !key:by-name Parameters:
@@ -6,19 +6,19 @@ properties:
       parameter:
         name: foo
 scm:
-  kind: hudson.plugins.git.GitSCM   # !by-name 'Git' is not unique
+  $class: hudson.plugins.git.GitSCM   # !by-name 'Git' is not unique
   userRemoteConfigs:
     url: https://github.com/jenkinsci/my-plugin.git
   branches:
     name: master
 builder:
-- kind: !by-name Invoke top-level Maven targets
+- $class: !by-name Invoke top-level Maven targets
   targets: clean package
-- kind: !by-name Execute shell
+- $class: !by-name Execute shell
   command: echo Hello World
 publisher:
-- kind: !by-name Build other projects
+- $class: !by-name Build other projects
   childProjects: test
   threshold: SUCCESS
-- kind: hudson.tasks.Mailer   # !by-name 'E-mail Notification' is not unique
+- $class: hudson.tasks.Mailer   # !by-name 'E-mail Notification' is not unique
   mailer_recipients: foo@bar.com

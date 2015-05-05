@@ -1,5 +1,5 @@
 logrotate: 'false'
 publisher:
   command: echo Hello World
-  kind: hudson.tasks.Shell
-kind: hudson.model.FreeStyleProject
+  $class: hudson.tasks.Shell
+$class: hudson.model.FreeStyleProject

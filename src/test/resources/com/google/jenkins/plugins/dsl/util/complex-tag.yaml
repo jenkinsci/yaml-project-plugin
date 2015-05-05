@@ -1,18 +1,18 @@
-kind: !freestyle
+$class: !freestyle
 scm:
-  kind: !git scm
+  $class: !git scm
   userRemoteConfigs:
     url: https://github.com/jenkinsci/my-plugin.git
   branches:
     name: master
 builder:
-- kind: !maven
+- $class: !maven
   targets: clean package
-- kind: !shell
+- $class: !shell
   command: echo Hello World
 publisher:
-- kind: !trigger
+- $class: !trigger
   childProjects: test
   threshold: SUCCESS
-- kind: !mailer
+- $class: !mailer
   mailer_recipients: foo@bar.com

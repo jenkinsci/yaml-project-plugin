@@ -41,7 +41,7 @@ import jenkins.model.Jenkins;
  * Register a global {@code !by-name} tag that takes as a single argument
  * the display name of the plugin we want to instantiate.  For example:
  * <pre>
- *   kind: !by-name Google Cloud Deployer
+ *   $class: !by-name Google Cloud Deployer
  * </pre>
  */
 @Extension(ordinal = -1000 /* fallback */)

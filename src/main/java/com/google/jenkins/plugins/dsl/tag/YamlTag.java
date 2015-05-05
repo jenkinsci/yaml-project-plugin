@@ -32,11 +32,11 @@ import java.lang.annotation.Target;
  * </pre>
  * Then in a YAML DSL users can write:
  * <pre>
- *   kind: !foo
+ *   $class: !foo
  * </pre>
  * In place of:
  * <pre>
- *   kind: com.google.jenkins.plugins.example.Foo
+ *   $class: com.google.jenkins.plugins.example.Foo
  * </pre>
  *
  * @see DescribableYamlTransformProvider

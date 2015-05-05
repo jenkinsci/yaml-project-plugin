@@ -1,12 +1,12 @@
-kind: !matrix
+$class: !matrix
 axis:
-- kind: !text-axis
+- $class: !text-axis
   name: OS
   valueString: 2.1 2.2
-- kind: !text-axis
+- $class: !text-axis
   name: DENSITY
   valueString: 160
-- kind: !text-axis
+- $class: !text-axis
   name: RESOLUTION
   valueString: HVGA
 
@@ -33,5 +33,5 @@ axis:
   wipeData: true
 
 builder:
-  kind: !shell
+  $class: !shell
   command: sleep 10

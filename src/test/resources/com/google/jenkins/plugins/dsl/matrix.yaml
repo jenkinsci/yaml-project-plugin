@@ -1,4 +1,4 @@
-kind: hudson.matrix.MatrixProject
+$class: hudson.matrix.MatrixProject
 builder:
-- kind: hudson.tasks.Shell
+- $class: hudson.tasks.Shell
   command: echo Hola Mundo

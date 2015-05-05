@@ -1,3 +1,3 @@
 builder:
-  kind: !maven
+  $class: !maven
   targets: clean verify

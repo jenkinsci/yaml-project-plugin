@@ -1,4 +1,4 @@
-kind: com.google.jenkins.plugins.dsl.YamlProject
+$class: com.google.jenkins.plugins.dsl.YamlProject
 yamlPath: .inner.yaml
 restriction:
   stapler-class: !by-name Unrestricted

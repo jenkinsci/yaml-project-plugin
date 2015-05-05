@@ -24,16 +24,16 @@ import java.util.List;
  * One anticipated use case of this will be to allow users to adopt
  * a shorthand to avoid learning fully qualified class named for plugins:
  * <pre>
- *   kind: hudson.model.FreeStyleProject   # &lt;== {@link #getClazz()}
+ *   $class: hudson.model.FreeStyleProject   # &lt;== {@link #getClazz()}
  * </pre>
  * might become:
  * <pre>
- *   kind: !freestyle                      # &lt;== {@link #getTag()}
+ *   $class: !freestyle                      # &lt;== {@link #getTag()}
  * </pre>
  *
  * However, we might also want to have a common lookup tag
  * <pre>
- *   kind: !name "Invoke top-level Maven targets"
+ *   $class: !name "Invoke top-level Maven targets"
  *   #           ^------------------------------^
  *   # We expect the above string will be returned by {@link #represent(Class)},
  *   # similarly we expect it to be the constant input to
@@ -41,7 +41,7 @@ import java.util.List;
  * </pre>
  * to allow a lookup by display name, to resolve:
  * <pre>
- *   kind: hudson.tasks.Maven
+ *   $class: hudson.tasks.Maven
  * </pre>
  */
 public interface YamlTransform {

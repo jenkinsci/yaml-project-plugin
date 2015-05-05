@@ -246,7 +246,7 @@ public class YamlProjectTest<T extends AbstractProject & TopLevelItem> {
           // is now a LeftItem (as in: "left" the queue), which shows as
           // isCancelled().
           // assertTrue(item.getFuture().isCancelled());
-          Queue.Item newItem = Queue.getInstance().getItem(item.id);
+          Queue.Item newItem = Queue.getInstance().getItem(item.getId());
           assertNotNull(newItem);
           assertThat(newItem, instanceOf(Queue.LeftItem.class));
           assertTrue(((Queue.LeftItem) newItem).isCancelled());

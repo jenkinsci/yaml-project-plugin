@@ -103,7 +103,7 @@ public interface Binder {
     @Override
     public <T extends Describable> T bind(JSONObject json)
         throws IOException, FormException {
-      final String clazz = checkNotNull(json.optString("kind", null));
+      final String clazz = checkNotNull(json.optString("$class", null));
 
       final Descriptor descriptor = getDescriptor(clazz);
 
@@ -122,7 +122,7 @@ public interface Binder {
     public <T extends Job> T bindJob(ItemGroup<? super T> parent,
         String name, JSONObject json) throws IOException {
       // TODO(mattmoor): What if: FreeStyleProject != T?
-      final String clazz = json.optString("kind",
+      final String clazz = json.optString("$class",
           FreeStyleProject.class.getName());
 
       final TopLevelItemDescriptor descriptor =

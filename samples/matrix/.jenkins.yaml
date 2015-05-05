@@ -1,15 +1,15 @@
-kind: !matrix
+$class: !matrix
 
 axis:
-- kind: !text-axis
+- $class: !text-axis
   name: FOO
   valueString: Hello World
 
-- kind: !text-axis
+- $class: !text-axis
   name: BAR
   valueString: World Mundo
 
 builder:
-  kind: !shell
+  $class: !shell
   command: echo $FOO $BAR
 
