@@ -16,7 +16,6 @@
 package com.google.jenkins.plugins.dsl;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -49,7 +48,6 @@ import hudson.tasks.Publisher;
 import hudson.util.FormValidation;
 
 import jenkins.branch.BranchProjectFactory;
-import jenkins.branch.DefaultDeadBranchStrategy;
 import jenkins.branch.MultiBranchProject;
 import jenkins.branch.MultiBranchProjectDescriptor;
 import jenkins.model.Jenkins;
@@ -71,38 +69,6 @@ public class YamlMultiBranchProject<T extends AbstractProject & TopLevelItem>
    */
   public YamlMultiBranchProject(ItemGroup parent, String name) {
     super(parent, name);
-
-    // By default, clean up branches that have been deleted.
-    DefaultDeadBranchStrategy deadBranchStrategy =
-        new DefaultDeadBranchStrategy(
-            true /* prune dead branches */,
-            "0" /* days to keep */,
-            "0" /* num to keep */);
-
-    // Monkey patch the better default.
-    // TODO(mattmoor): upstream making the "deadBranchStrategy"
-    // field protected instead of patching the object to set it here.
-    {
-      Class<?> clazz = YamlMultiBranchProject.class.getSuperclass();
-      Field field = null;
-      for (Field iter : clazz.getDeclaredFields()) {
-        if ("deadBranchStrategy".equals(iter.getName())) {
-          field = iter;
-          break;
-        }
-      }
-      if (field == null) {
-        throw new IllegalStateException(
-            "deadBranchStrategy field missing from MultiBranchProject");
-      }
-      try {
-        field.setAccessible(true);
-        field.set(this, deadBranchStrategy);
-      } catch (IllegalAccessException e) {
-        // Impossible, we have given ourselves access.
-      }
-    }
-    deadBranchStrategy.setOwner(this);
   }
 
   /** {@inheritDoc} */
