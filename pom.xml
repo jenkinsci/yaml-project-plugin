@@ -46,6 +46,10 @@
       <id>mattmoor</id>
       <name>Matt Moore</name>
     </developer>
+    <developer>
+      <id>astroilov</id>
+      <name>Andrey Stroilov</name>
+    </developer>
   </developers>
 
   <scm>

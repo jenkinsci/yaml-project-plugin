@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
 import javax.annotation.Nullable;
 import javax.servlet.ServletException;
@@ -44,6 +45,7 @@ import com.google.common.collect.Maps;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
+import hudson.model.BuildableItemWithBuildWrappers;
 import hudson.model.DependencyGraph;
 import hudson.model.Descriptor;
 import hudson.model.Descriptor.FormException;
@@ -54,6 +56,8 @@ import hudson.model.TopLevelItem;
 import hudson.model.View;
 import hudson.model.ViewGroup;
 import hudson.model.ViewGroupMixIn;
+import hudson.tasks.BuildWrapper;
+import hudson.tasks.BuildWrappers;
 import hudson.tasks.Publisher;
 import hudson.util.DescribableList;
 import hudson.views.ViewsTabBar;
@@ -78,7 +82,7 @@ public abstract class AbstractRunnableItemGroup<
        P extends AbstractRunnableItemGroup<T, P, B>,
          B extends AbstractBuild<P, B>>
     extends AbstractBranchAwareProject<P, B>
-    implements ViewGroup, ItemGroup<T> {
+    implements ViewGroup, ItemGroup<T>, BuildableItemWithBuildWrappers {
   /**
    * Build up our Yaml project shell, which gets populated in
    * {@link #submit(StaplerRequest, StaplerResponse)}.
@@ -89,6 +93,10 @@ public abstract class AbstractRunnableItemGroup<
     this.projects = Maps.newHashMap();
 
     init();
+  }
+
+  public AbstractProject<?, ?> asProject() {
+    return this;
   }
 
   /** {@inheritDoc} */
@@ -199,6 +207,17 @@ public abstract class AbstractRunnableItemGroup<
   @Nullable
   private volatile DescribableList<Publisher, Descriptor<Publisher>> publishers;
 
+  /**
+   * List of active {@link BuildWrapper}s configured for this project.
+   */
+  private volatile DescribableList<BuildWrapper, Descriptor<BuildWrapper>>
+      buildWrappers;
+  private static final AtomicReferenceFieldUpdater<AbstractRunnableItemGroup,
+      DescribableList>
+      buildWrappersSetter = AtomicReferenceFieldUpdater.newUpdater(
+          AbstractRunnableItemGroup.class, DescribableList.class,
+          "buildWrappers");
+
   @Nullable
   protected Map<String, T> projects;
 
@@ -236,6 +255,19 @@ public abstract class AbstractRunnableItemGroup<
     return Collections.unmodifiableCollection(projects.values());
   }
 
+  public Map<Descriptor<BuildWrapper>, BuildWrapper> getBuildWrappers() {
+    return getBuildWrappersList().toMap();
+  }
+
+  public DescribableList<BuildWrapper, Descriptor<BuildWrapper>>
+      getBuildWrappersList() {
+    if (buildWrappers == null) {
+      buildWrappersSetter.compareAndSet(this, null,
+          new DescribableList<BuildWrapper, Descriptor<BuildWrapper>>(this));
+    }
+    return buildWrappers;
+  }
+
   /** This surfaces the embedded projects to the Jenkins UI. */
   @Exported
   public T getJob(String name) {
@@ -252,6 +284,7 @@ public abstract class AbstractRunnableItemGroup<
   @Override
   protected void buildDependencyGraph(DependencyGraph graph) {
     getPublishersList().buildDependencyGraph(this, graph);
+    getBuildWrappersList().buildDependencyGraph(this, graph);
     // Anything that implements DependencyDeclarer can contribute to
     // the dependency graph, so if our build or build wrappers (or
     // whatever else) might implement this, then we should delegate to
@@ -270,6 +303,7 @@ public abstract class AbstractRunnableItemGroup<
       throws IOException {
     super.onLoad(parent, name);
     getPublishersList().setOwner(this);
+    getBuildWrappersList().setOwner(this);
 
     this.projects = loadChildren(this, getJobsDir(), KEYED_BY_NAME);
     init();
@@ -356,6 +390,7 @@ public abstract class AbstractRunnableItemGroup<
 
     final JSONObject json = req.getSubmittedForm();
 
+    getBuildWrappersList().rebuild(req, json, BuildWrappers.getFor(this));
     getPublishersList().rebuildHetero(req, json, Publisher.all(), "publisher");
   }
 }
