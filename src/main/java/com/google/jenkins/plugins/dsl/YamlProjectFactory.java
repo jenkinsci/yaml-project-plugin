@@ -27,9 +27,6 @@ import org.kohsuke.stapler.DataBoundConstructor;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.base.Charsets;
-import com.google.common.hash.Hashing;
-import com.google.common.primitives.UnsignedLongs;
 import com.google.jenkins.plugins.dsl.restrict.AbstractRestriction;
 
 import hudson.Extension;
@@ -91,23 +88,13 @@ public class YamlProjectFactory<T extends AbstractProject & TopLevelItem>
   @Override
   public YamlProject<T> newInstance(final Branch branch) {
     try {
-      // If the branch name contains '/' then use its MD5 hash
-      // as the project name, but otherwise use the branch name
-      // for backwards compatibility.
-      final String hashedName = UnsignedLongs.toString(Hashing.md5().hashString(
-          branch.getName(), Charsets.UTF_8).asLong(), 16);
-      final String projectName =
-          branch.getName().indexOf('/') == -1 ? branch.getName() : hashedName;
       final YamlProject<T> project = new YamlProject<T>(
           (YamlMultiBranchProject<T>) getOwner(),
-          projectName, null /* module */);
-
-      // Set the display name so that it is always the branch name.
-      project.setDisplayName(branch.getName());
+          branch.getEncodedName(), null /* module */);
 
       project.setBranch(branch);
 
-      return decorate(project);
+      return project;
     } catch (IOException e) {
       logger.log(SEVERE, e.getMessage(), e);
       return null;
