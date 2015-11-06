@@ -205,6 +205,7 @@ public class YamlProjectFactoryTest {
 
     YamlProject project = underTest.newInstance(branch);
     assertNotNull(project);
+    underTest.decorate(project);
     assertEquals(YAML_PATH, project.getYamlPath());
     assertSame(RESTRICTION, project.getRestriction());
     assertSame(branch, project.getBranch());
