@@ -81,10 +81,10 @@ public class AbstractBranchAwareProjectTest {
   @Test
   public void testSimple() throws Exception {
     TestBranchAwareProject topLevelProject =
-        Jenkins.getInstance().createProject(
+            Jenkins.getInstance().createProject(
             TestBranchAwareProject.class, "topLevelProject");
 
-    FreeStyleProject leafProject = FreeStyleProject.DESCRIPTOR.newInstance(
+    FreeStyleProject leafProject = Jenkins.getInstance().getDescriptorByType(FreeStyleProject.DescriptorImpl.class).newInstance(
         topLevelProject, "foo");
     leafProject.setScm(new DelegateSCM(TestBranchAwareProject.class));
     topLevelProject.setItem(leafProject);
@@ -116,8 +116,9 @@ public class AbstractBranchAwareProjectTest {
     topLevelProject.setItem(middleProject);
     middleProject.onCreatedFromScratch();
 
-    FreeStyleProject leafProject = FreeStyleProject.DESCRIPTOR.newInstance(
-        middleProject, "foo");
+    FreeStyleProject leafProject = Jenkins.getInstance()
+            .getDescriptorByType(FreeStyleProject.DescriptorImpl.class).newInstance(
+                    middleProject, "foo");
     leafProject.setScm(new DelegateSCM(TestBranchAwareProject.class));
     middleProject.setItem(leafProject);
     leafProject.onCreatedFromScratch();
@@ -171,8 +172,8 @@ public class AbstractBranchAwareProjectTest {
         Jenkins.getInstance().createProject(
             TestBranchAwareProject.class, "topLevelProject");
 
-    FreeStyleProject leafProject = FreeStyleProject.DESCRIPTOR.newInstance(
-        topLevelProject, "foo");
+    FreeStyleProject leafProject = Jenkins.getInstance()
+            .getDescriptorByType(FreeStyleProject.DescriptorImpl.class).newInstance(topLevelProject, "foo");
     leafProject.setScm(new DelegateSCM(TestBranchAwareProject.class));
     topLevelProject.setItem(leafProject);
     leafProject.onCreatedFromScratch();
@@ -198,8 +199,8 @@ public class AbstractBranchAwareProjectTest {
     // and the grep for WORLD to fail.
     // topLevelProject.setScm(new SemiNullSCM());
 
-    FreeStyleProject leafProject = FreeStyleProject.DESCRIPTOR.newInstance(
-        topLevelProject, "foo");
+    FreeStyleProject leafProject = Jenkins.getInstance()
+            .getDescriptorByType(FreeStyleProject.DescriptorImpl.class).newInstance(topLevelProject, "foo");
     leafProject.setScm(new DelegateSCM(TestBranchAwareProject.class));
     topLevelProject.setItem(leafProject);
     leafProject.onCreatedFromScratch();
@@ -229,8 +230,8 @@ public class AbstractBranchAwareProjectTest {
             TestBranchAwareProject.class, "topLevelProject");
     topLevelProject.setScm(new SemiNullSCM());
 
-    FreeStyleProject leafProject = FreeStyleProject.DESCRIPTOR.newInstance(
-        topLevelProject, "foo");
+    FreeStyleProject leafProject = Jenkins.getInstance()
+            .getDescriptorByType(FreeStyleProject.DescriptorImpl.class).newInstance(topLevelProject, "foo");
     leafProject.setScm(new DelegateSCM(TestBranchAwareProject.class));
     topLevelProject.setItem(leafProject);
     leafProject.onCreatedFromScratch();

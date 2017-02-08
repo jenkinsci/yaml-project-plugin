@@ -41,6 +41,8 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -567,7 +569,7 @@ public class YamlProjectTest<T extends AbstractProject & TopLevelItem> {
   @Test
   public void testRestrictionFailure_trampolineJob() throws Exception {
     String body = readResource("trampoline.yaml");
-    body = body.replaceAll(".inner.yaml", innerFile.toString());
+    body = body.replaceAll(".inner.yaml", StringUtils.escape(innerFile.toString()));
     writeStringToFile(body, yamlFile);
     writeResourceToFile("bad.yaml", innerFile);
     underTest.setRestriction(new CustomBlacklist(
