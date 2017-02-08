@@ -3,4 +3,5 @@ work/
 */.gitignore
 *.iml
 */*.iml
+.idea/
 dependency-reduced-pom.xml
